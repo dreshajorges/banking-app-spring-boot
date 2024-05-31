@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+
+<body>
+<div>
+    <label for="from">From:</label><input type="text" placeholder="from" id="from" />
+    <label for="text">Text:</label><input type="text" placeholder="text" id="text" />
+    <button type="button" id="btnSend" onclick="sendMessage()">Send Message</button>
+</div>
+<hr>
+<div id="messages">
+
+</div>
+
+<script>
+    let stompClient = undefined;
+
+    function connect() {
+        const webSocket = new SockJS("/chat");
+        stompClient = Stomp.over(webSocket);
+
+        stompClient.connect({}, (frame) => {
+            console.log(`Connected to frame: ${frame}`);
+
+            stompClient.subscribe('/topic/messages', (message) => {
+                showOutputMessage(JSON.parse(message.body));
+            });
+
+        });
+    }
+
+    function showOutputMessage(message) {
+        // if(message.from==document.getElementById('from').value) {
+        //     return
+        // }
+
+        var response = document.getElementById('messages');
+        console.log(message.from)
+        var p = document.createElement('p');
+
+        p.appendChild(document.createTextNode(message.from + ": " + message.text));
+        response.appendChild(p);
+    }
+
+    function sendMessage() {
+        const from = document.getElementById('from').value;
+        const text = document.getElementById('text').value;
+        stompClient.send('/app/message', {}, JSON.stringify({'from':from, 'text':text}));
+    }
+
+    window.onload = connect;
+
+
+</script>
+
+</body>
+
+</html>
