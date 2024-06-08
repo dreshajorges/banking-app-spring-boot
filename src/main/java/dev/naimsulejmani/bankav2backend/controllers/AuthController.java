@@ -10,26 +10,24 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/banka/users")
+@RequestMapping("/api/banka/auth")
 @RequiredArgsConstructor
-public class UserController {
+public class AuthController {
 
-    private final UserService userService;
+    private final AuthService authService;
 
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<UserEntity> deleteById(@PathVariable long id){
+    @PostMapping("/register")
+    public ResponseEntity<UserAuthResponse> register(@RequestBody UserRegisterRequest request) {
 
-        return ResponseEntity.ok(userService.deleteById(id));
+        return ResponseEntity.ok(authService.register(request));
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<UserAuthResponse> login(@RequestBody UserLoginRequest request) {
 
-    @GetMapping
-    public ResponseEntity<List<UserEntity>> getUsers(){
+        return ResponseEntity.ok(authService.login(request));
 
-        return ResponseEntity.ok(userService.findAll());
     }
 }

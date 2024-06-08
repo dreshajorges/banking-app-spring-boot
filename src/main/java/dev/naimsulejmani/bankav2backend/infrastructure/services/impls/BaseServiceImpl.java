@@ -21,9 +21,7 @@ public abstract class BaseServiceImpl<T extends HasId<Tid>,Tid> implements BaseS
 
     @Override
     public T add(T item) {
-        var itemFound = repository.findById(item.getId());
-        if (itemFound.isPresent())
-            throw new AlreadyExistsException("Entity Already exists!");
+
         return repository.save(item);
     }
 

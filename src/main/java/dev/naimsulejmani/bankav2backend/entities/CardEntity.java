@@ -1,22 +1,21 @@
 package dev.naimsulejmani.bankav2backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.naimsulejmani.bankav2backend.entities.enums.CardType;
+import dev.naimsulejmani.bankav2backend.infrastructure.helpers.HasId;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 
 @Entity
 @Table(name = "cards")
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CardEntity {
+public class CardEntity implements HasId<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +29,6 @@ public class CardEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private UserEntity user;
 }

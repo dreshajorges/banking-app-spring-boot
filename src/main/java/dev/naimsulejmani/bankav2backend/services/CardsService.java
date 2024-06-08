@@ -1,4 +1,9 @@
 package dev.naimsulejmani.bankav2backend.services;
 
-public interface CardsService {
+import dev.naimsulejmani.bankav2backend.entities.CardEntity;
+import dev.naimsulejmani.bankav2backend.infrastructure.services.BaseService;
+import org.springframework.stereotype.Service;
+
+
+public interface CardsService extends BaseService<CardEntity, Long> {
 }
