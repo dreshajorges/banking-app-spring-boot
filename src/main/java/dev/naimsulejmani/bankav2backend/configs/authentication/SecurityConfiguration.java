@@ -29,7 +29,7 @@ public class SecurityConfiguration {
                 .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/api/banka/auth/**").permitAll()
-                        .requestMatchers("/api/banka/users/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/banka/users").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

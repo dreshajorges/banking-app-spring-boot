@@ -1,0 +1,17 @@
+[33mcommit b6b25a3ff8ddd6f9949a9d1340fc60ab8e86b106[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Orges Dreshaj <orges.dreshaj@student.cacttus.education>
+Date:   Sun Jun 9 00:53:55 2024 +0200
+
+    first commit
+
+[33mcommit de137f185f45a27775827f6c6c557a4fe0fb8330[m
+Author: Orges Dreshaj <orges.dreshaj@student.cacttus.education>
+Date:   Sun Jun 9 00:40:43 2024 +0200
+
+    added the funcionality of ADMIN
+
+[33mcommit d39bc61bdd4c8ddd9df8b562e027e2f4a082bb80[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Orges Dreshaj <orges.dreshaj@student.cacttus.education>
+Date:   Fri May 31 02:06:47 2024 +0200
+
+    changed the project, added some security configs and dtos

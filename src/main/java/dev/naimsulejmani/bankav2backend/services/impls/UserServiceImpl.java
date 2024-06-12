@@ -12,4 +12,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity, Long> implement
     public UserServiceImpl(UserRepository repository) {
         super(repository);
     }
+
+
 }
