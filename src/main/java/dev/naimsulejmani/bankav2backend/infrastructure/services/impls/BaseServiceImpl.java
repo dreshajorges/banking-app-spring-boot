@@ -52,5 +52,6 @@ public abstract class BaseServiceImpl<T extends HasId<Tid>,Tid> implements BaseS
     public T modify(Tid id, T item) {
         this.findById(id);
         return repository.save(item);
+
     }
 }
