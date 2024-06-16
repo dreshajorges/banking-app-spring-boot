@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 
 
 public interface CardsService extends BaseService<CardEntity, Long> {
+
+    void sendMoney(String senderCardNumber, String recipientCardNumber, double amount);
 }

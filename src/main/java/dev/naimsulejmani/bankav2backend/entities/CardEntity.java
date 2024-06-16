@@ -29,6 +29,5 @@ public class CardEntity implements HasId<Long> {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference
     private UserEntity user;
 }

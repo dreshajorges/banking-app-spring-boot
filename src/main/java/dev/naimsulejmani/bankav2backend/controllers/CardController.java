@@ -1,5 +1,6 @@
 package dev.naimsulejmani.bankav2backend.controllers;
 
+import dev.naimsulejmani.bankav2backend.dtos.SendMoneyRequest;
 import dev.naimsulejmani.bankav2backend.entities.CardEntity;
 import dev.naimsulejmani.bankav2backend.services.CardsService;
 import dev.naimsulejmani.bankav2backend.services.impls.CardServiceImpl;
@@ -29,6 +30,13 @@ public class CardController {
     @GetMapping("/{id}")
     private ResponseEntity<CardEntity> getCardById(@PathVariable long id){
         return ResponseEntity.ok(service.findById(id));
+    }
+
+    @PostMapping("/send-money")
+    public void sendMoney(@RequestBody SendMoneyRequest sendMoneyRequest) {
+        service.sendMoney(sendMoneyRequest.getSenderCardNumber(),
+                sendMoneyRequest.getRecipientCardNumber(),
+                sendMoneyRequest.getAmount());
     }
 
 }

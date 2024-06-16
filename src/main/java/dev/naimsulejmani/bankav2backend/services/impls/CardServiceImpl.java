@@ -9,6 +9,7 @@ import dev.naimsulejmani.bankav2backend.services.CardsService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class CardServiceImpl extends BaseServiceImpl<CardEntity, Long> implements CardsService {
@@ -30,6 +31,38 @@ public class CardServiceImpl extends BaseServiceImpl<CardEntity, Long> implement
         return super.add(item);
     }
 
+@Override
+    public void sendMoney(String senderCardNumber, String recipientCardNumber, double amount) {
+        // Step 1: Fetch sender's card entity from database
+        Optional<CardEntity> optionalSenderCard = ((CardRepository) repository).findByCardNumber(senderCardNumber);
+        if (optionalSenderCard.isEmpty()) {
+            throw new IllegalArgumentException("Sender card not found");
+        }
+        CardEntity senderCard = optionalSenderCard.get();
+
+        // Step 2: Fetch recipient's card entity from database
+        Optional<CardEntity> optionalRecipientCard = ((CardRepository) repository).findByCardNumber(recipientCardNumber);
+        if (optionalRecipientCard.isEmpty()) {
+            throw new IllegalArgumentException("Recipient card not found");
+        }
+        CardEntity recipientCard = optionalRecipientCard.get();
+
+        // Step 3: Check if sender has sufficient balance
+        if (senderCard.getBalance() < amount) {
+            throw new IllegalArgumentException("Insufficient balance in sender's account");
+        }
+
+        // Step 4: Perform the money transfer
+        senderCard.setBalance(senderCard.getBalance() - amount);
+        recipientCard.setBalance(recipientCard.getBalance() + amount);
+
+        // Step 5: Update both card entities in the database
+        repository.save(senderCard);
+        repository.save(recipientCard);
+    }
+
+
+
 
 
 
@@ -41,4 +74,5 @@ public class CardServiceImpl extends BaseServiceImpl<CardEntity, Long> implement
         }
         return random16Digits.toString();
     }
+
 }
