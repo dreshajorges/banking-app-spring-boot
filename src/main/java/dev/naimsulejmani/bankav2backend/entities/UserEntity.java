@@ -22,7 +22,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity  implements UserDetails, HasId<Long> {
+public class UserEntity implements UserDetails, HasId<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +44,7 @@ public class UserEntity  implements UserDetails, HasId<Long> {
     private List<CardEntity> cards;
 
     @Enumerated(EnumType.STRING)
-    private Roles role  = Roles.USER;
+    private Roles role = Roles.USER;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
